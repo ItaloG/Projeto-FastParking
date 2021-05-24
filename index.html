@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FastParking</title>
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Karla:wght@300;400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/styleGlobal.css">
+    <link rel="stylesheet" href="css/hader.css">
+    <script src="main.js" defer></script>
+
+</head>
+<body>
+    <header id="header">
+        <h1>Sistema FastParking</h1>
+        <img src="logoFastParking.png" alt="FastParking" title="FastParking">
+    </header>
+    <main>
+        <table >
+            <thead>
+                <tr>
+                    <th>Nome</th>
+                    <th>Placa</th>
+                    <th>data</th>
+                    <th>Hora</th>
+                    <th>Ações</th>
+                </tr>
+            </thead>
+            <tbody>
+                <td>Maria da Silva</td>
+                <td>RCA-3438</td>
+                <td>12/11/2018</td>
+                <td>14:00</td>
+                <td>
+                    <button type="button">Comp.</button>
+                    <button type="button">Editar</button>
+                    <button type="button">Saída</button>
+                </td>
+            </tbody>
+        </table>
+
+        <div>
+            <div>
+                <header>
+                    <span>&#10006;</span>
+                </header>
+               
+                <form class="form">
+                    <input type="text" placeholder="Nome" required/>
+                    <input type="email" placeholder="E-mail" required/>
+                    <input type="text" pattern="\(?\d{2}\) ?9?\d{4}-?\d{4}" placeholder="Celular" maxlength="14"/>
+                    <input type="text" placeholder="Cidade" required/>
+                </form>
+                
+                <footer>
+                    <button type="submit" id="salvar">Salvar</button>
+                    <button type="button" id="cancelar">Cancelar</button>
+                </footer>
+            </div>
+        </div>
+    </main>    
+</body>
+</html>
