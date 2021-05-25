@@ -9,6 +9,10 @@
     margin: 0 auto;
 }
 
+#table thead th{
+    background-color: #edf100;
+}
+
 #table thead th,
 #table tbody td{
     border: solid 1px black;
@@ -63,4 +67,60 @@
     background-color: #fff;
     border: solid 1px #13CE66;
     color: #13CE66;
+}
+.button.yellow {
+    background-color: #d7db03;
+    border: solid 1px #d7db03;
+}
+
+.button.yellow:hover{
+    background-color: #fff;
+    border: solid 1px #d7db03;
+    color: #d7db03;
+}
+
+
+#container-register{
+    width: 30vw;
+    display: flex;
+    flex-direction: column;
+
+    border: solid 2px black;
+
+    margin: 0 auto 5vh;
+    border-radius: 5px;
+}
+
+#form-register{
+    display: flex;
+    flex-direction: column;
+
+    gap: 30px;
+    margin: 40px auto;
+}
+
+#form-register div{
+    width: 250px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+} 
+
+#footer-register{
+    display: flex;
+    margin: 0 auto 30px;
+    gap: 20px;
+}
+
+.input-register{
+    width: calc(40px + 10vw);
+    height: 30px;
+    padding: 0 3px;
+    font-size: 14px;
+    border-radius: 3px;
+    outline-style: none;
+    border: 1px solid #919191;
+}
+.input-register:focus {
+    border: 2px solid #1fb6ff;
 }
