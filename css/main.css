@@ -1,3 +1,4 @@
+/* TABELA */
 #table {
     width: 1000px;
     text-align: center;
@@ -24,7 +25,8 @@
     max-width: 200px;
     text-align: center;
 }
-
+/* ********* */
+/* BOTÕES */
 .button{
     border-style: none;
     padding: 0 20px;
@@ -78,15 +80,16 @@
     border: solid 1px #d7db03;
     color: #d7db03;
 }
-
-
+/* ********* */
+/* FORMULÁRIOS */
+/* FORMULÁRIO REGISTRO */
 #container-register{
-    width: 30vw;
+    width: calc(40px + 35vw);
     display: flex;
     flex-direction: column;
-
+    
     border: solid 2px black;
-
+    
     margin: 0 auto 5vh;
     border-radius: 5px;
 }
@@ -94,7 +97,7 @@
 #form-register{
     display: flex;
     flex-direction: column;
-
+    
     gap: 30px;
     margin: 40px auto;
 }
@@ -102,7 +105,7 @@
 #form-register div{
     width: 250px;
     display: flex;
-    justify-content: space-between;
+    justify-content: space-around;
     align-items: center;
 } 
 
@@ -112,7 +115,7 @@
     gap: 20px;
 }
 
-.input-register{
+.input-form{
     width: calc(40px + 10vw);
     height: 30px;
     padding: 0 3px;
@@ -121,6 +124,8 @@
     outline-style: none;
     border: 1px solid #919191;
 }
-.input-register:focus {
+.input-form:focus {
     border: 2px solid #1fb6ff;
 }
+
+/* FORMULÁRIO PREÇO */
