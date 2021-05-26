@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Comprovante</title>
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Karla:wght@300;400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/styleGlobal.css">
+    <link rel="stylesheet" href="css/hader.css">
+    <link rel="stylesheet" href="css/main.css">
+    <script src="main.js" defer></script>
+</head>
+<body>
+    <header id="header">
+        <h1>Sistema <span id="Fast">Fast</span><span id="Parking">Parking</span></h1>
+        <img src="logoFastParking.png" alt="FastParking" title="FastParking">
+    </header>
+    <main>
+        <div id="container-receipt">  
+            <header>
+                <h1>Comprovante</h1>
+            </header>      
+            <form id="form-receipt">
+                <div>
+                    <label>Nome:</label>
+                    <input class="input-empty" readonly/>
+                </div>
+                <div>
+                    <label>Placa:</label>
+                    <input class="input-empty" readonly/>
+                </div>
+                <div>
+                    <label>Data:</label>
+                    <input class="input-empty" readonly/>
+                </div>
+                <div>
+                    <label>Hora:</label>
+                    <input class="input-empty" readonly/>
+                </div>
+            </form>
+            <footer id="footer-receipt">
+                <button type="submit" class="button blue" id="salvar">Imprimir</button>
+                <button type="button" class="button red" id="cancelar" onclick="javascript:window.location.href='cadastroCarros.html'">Cancelar</button>
+            </footer>
+            
+        </div>
+    </main>
+</body>
+</html>

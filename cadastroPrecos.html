@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-<!DOCTYPE html>
 <html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
@@ -13,11 +12,10 @@
     <script src="main.js" defer></script>
 </head>
 <body>
-    <button onclick="javascript:window.location.href='cadastroCarros.html'">Voltar</button>
+    <main>
     <div id="container-price">
         <header>
             <h1>Preços</h1>
-            <hr/>
         </header>       
         <form id="form-price">
             <div>
@@ -30,9 +28,10 @@
             </div>
         </form>
         <footer id="footer-price">
-            <button type="submit" class="button green" id="salvar">Salvar</button>
-            <button type="button" class="button red" id="cancelar">Cancelar</button>
+            <button type="submit" class="button green" id="salvar" onclick="javascript:window.location.href='cadastroCarros.html'">Salvar</button>
+            <button type="button" class="button red" id="cancelar" onclick="javascript:window.location.href='cadastroCarros.html'">Cancelar</button>
         </footer>
     </div>
+    </main>
 </body>
 </html>
