@@ -188,3 +188,36 @@
 #container-receipt h1{
     border-bottom: solid 1.5px rgba(63, 63, 63, 0.849) ;
 }
+
+#form-receipt{
+    display: flex;
+    flex-direction: column;
+    
+    gap: 30px;
+    margin: 40px auto;
+}
+
+#form-receipt div{
+    width: 230px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 1.1rem;
+
+}
+
+#footer-receipt{
+    display: flex;
+    margin: 0 auto;
+    gap: 60px;
+}
+
+.input-readonly{
+    border-style: none;
+    border-bottom: solid 1px black;
+}
+
+.input-readonly:focus{
+    outline-style: none;
+    border-bottom: solid 1px black;
+}
