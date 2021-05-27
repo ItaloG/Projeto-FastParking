@@ -170,8 +170,8 @@
     gap: 60px;
 }
 /* ********* */
-/* COMPROVANTE */
-#container-receipt{
+/* COMPROVANTES */
+.container-receipt{
     width: calc(40px + 40vw);
     display: flex;
     flex-direction: column;
@@ -180,16 +180,16 @@
     border-radius: 5px;
 }
 
-#container-receipt header{
+.container-receipt header{
     padding: 10px;
     
 }
 
-#container-receipt h1{
+.container-receipt h1{
     border-bottom: solid 1.5px rgba(63, 63, 63, 0.849) ;
 }
 
-#form-receipt{
+.form-receipt{
     display: flex;
     flex-direction: column;
     
@@ -197,8 +197,8 @@
     margin: 40px auto;
 }
 
-#form-receipt div{
-    width: 230px;
+.form-receipt div{
+    width: 250px;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -206,7 +206,7 @@
 
 }
 
-#footer-receipt{
+.footer-receipt{
     display: flex;
     margin: 0 auto;
     gap: 60px;
