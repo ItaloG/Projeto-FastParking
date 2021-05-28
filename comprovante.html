@@ -9,7 +9,6 @@
     <link rel="stylesheet" href="css/styleGlobal.css">
     <link rel="stylesheet" href="css/hader.css">
     <link rel="stylesheet" href="css/main.css">
-    <script src="main.js" defer></script>
 </head>
 <body>
     <header id="header">
@@ -40,11 +39,21 @@
                 </div>
             </form>
             <footer class="footer-receipt">
-                <button type="submit" class="button blue" id="salvar">Imprimir</button>
+                <button type="submit" class="button blue" id="imprimir">Imprimir</button>
                 <button type="button" class="button red" id="cancelar" onclick="javascript:window.location.href='cadastroCarros.html'">Cancelar</button>
             </footer>
             
         </div>
     </main>
 </body>
+<script src="main.js"></script>
+<script lang="javascript">
+
+document.querySelector('#imprimir')
+    .addEventListener('click', printRecipt);
+
+document.querySelector('#cancelar')
+    .addEventListener('click', clearInputs);
+    
+</script>
 </html>

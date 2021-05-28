@@ -1,5 +1,5 @@
 /* TABELA */
-#table {
+#tableCars {
     width: 1000px;
     text-align: center;
 
@@ -10,18 +10,18 @@
     margin: 0 auto;
 }
 
-#table thead th{
+#tableCars thead th{
     background-color: #edf100;
 }
 
-#table thead th,
-#table tbody td{
+#tableCars thead th,
+#tableCars tbody td{
     border: solid 1px black;
     padding: 13px;
 }
 
-#table thead th:last-child,
-#table tbody td:last-child{
+#tableCars thead th:last-child,
+#tableCars tbody td:last-child{
     max-width: 200px;
     text-align: center;
 }
@@ -198,12 +198,17 @@
 }
 
 .form-receipt div{
-    width: 250px;
+    width: 300px;
     display: flex;
     justify-content: space-between;
-    align-items: center;
     font-size: 1.1rem;
 
+}
+
+.form-receipt label{
+    width: 280px;
+    text-align: center;
+    /* background-color: tomato; */
 }
 
 .footer-receipt{

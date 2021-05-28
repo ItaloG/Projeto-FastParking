@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="css/styleGlobal.css">
     <link rel="stylesheet" href="css/hader.css">
     <link rel="stylesheet" href="css/main.css">
-    <script src="main.js" defer></script>
+
 
 </head>
 <body>
@@ -31,11 +31,11 @@
             </form>
             <footer id="footer-register">
                 <button type="submit" class="button green" id="salvar">Salvar</button>
-                <button type="button" class="button yellow" id="cancelar" onclick="javascript:window.location.href='cadastroPrecos.html'">Preços</button>
+                <button type="button" class="button yellow" id="precos" onclick="javascript:window.location.href='cadastroPrecos.html'">Preços</button>
             </footer>
             
         </div>
-        <table id="table">
+        <table id="tableCars">
             <thead>
                 <tr>
                     <th>Nome</th>
@@ -46,28 +46,48 @@
                 </tr>
             </thead>
             <tbody>
-                <td>Maria da Silva</td>
-                <td>RCA-3438</td>
-                <td>12/11/2018</td>
-                <td>14:00</td>
-                <td>
-                    <button class="button green" type="button" onclick="javascript:window.location.href='comprovante.html'">Comp.</button>
-                    <button class="button blue" type="button">Editar</button>
-                    <button class="button red" type="button" onclick="javascript:window.location.href='comprovanteSaida.html'">Saída</button>
-                </td>
+                <tr>
+                    <td>Maria da Silva</td>
+                    <td>RCA-3438</td>
+                    <td>12/11/2018</td>
+                    <td>14:00</td>
+                    <td>
+                        <button id="button-receipt" class="button green" type="button" onclick="javascript:window.location.href='comprovante.html'">Comp.</button>
+                        <button id="button-edit" class="button blue" type="button">Editar</button>
+                        <button id="button-exit" class="button red" type="button" onclick="javascript:window.location.href='comprovanteSaida.html'">Saída</button>
+                    </td>
+                </tr>
             </tbody>
-            <tbody>
+            <!-- <tbody>
                 <td>Marcos Coelho</td>
                 <td>FKX-3651</td>
                 <td>12/11/2018</td>
                 <td>14:11</td>
                 <td>
-                    <button class="button green" type="button" onclick="javascript:window.location.href='comprovante.html'">Comp.</button>
-                    <button class="button blue" type="button">Editar</button>
-                    <button class="button red" type="button" onclick="javascript:window.location.href='comprovanteSaida.html'">Saída</button>
+                    <button id="button-receipt" class="button green" type="button" onclick="javascript:window.location.href='comprovante.html'">Comp.</button>
+                    <button id="button-edit" class="button blue" type="button">Editar</button>
+                    <button id="button-exit" class="button red" type="button" onclick="javascript:window.location.href='comprovanteSaida.html'">Saída</button>
                 </td>
-            </tbody>
+            </tbody> -->
         </table>
     </main>    
 </body>
+<script src="main.js"></script>
+<script lang="javascript">
+    document.querySelector('#button-receipt')
+        .addEventListener('click', clearInputs);
+
+    document.querySelector('#button-edit')
+        .addEventListener('click', clearInputs);
+
+    document.querySelector('#button-exit')
+        .addEventListener('click', clearInputs);
+
+    document.querySelector('#salvar')
+        .addEventListener('click', saveCar);
+
+    document.querySelector('#precos')
+        .addEventListener('click', clearInputs);
+        
+</script>
 </html>
