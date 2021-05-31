@@ -20,7 +20,7 @@
             <header>
                 <h1>Comprovante</h1>
             </header>      
-            <form class="form-receipt">
+            <form class="form-receipt" id="form-receipt">
                 <div>
                     <label>Nome:</label>
                     <input class="input-readonly" readonly/>
@@ -54,6 +54,8 @@ document.querySelector('#imprimir')
 
 document.querySelector('#cancelar')
     .addEventListener('click', clearInputs);
+
+console.log(getButtons());
     
 </script>
 </html>
