@@ -2,10 +2,10 @@
 
 const date = new Date();
 const dateTime = {
-    'day'    : date.getDate(),
-    'mounth'  : date.getMonth() + 1,
-    'year'   : date.getFullYear(),
-    'hours'  : date.getHours(),
+    'day': date.getDate(),
+    'mounth': date.getMonth() + 1,
+    'year': date.getFullYear(),
+    'hours': date.getHours(),
     'minutes': date.getMinutes()
 }
 
@@ -13,7 +13,7 @@ const readDB = () => JSON.parse(localStorage.getItem('db')) ?? [];
 
 const setDB = (db) => localStorage.setItem('db', JSON.stringify(db));
 
-const insertIntoDB = (car) =>{
+const insertIntoDB = (car) => {
     const db = readDB();
     db.push(car);
     setDB(db);
@@ -28,7 +28,7 @@ const getDateNow = () => {
     return dateNow;
 }
 
-const getHoursNow = () =>{
+const getHoursNow = () => {
     const timeNow = dateTime['hours'] + ':' + dateTime['minutes'];
 
     return timeNow;
@@ -60,25 +60,25 @@ const createRow = (car, index) => {
 
 // onclick="javascript:window.location.href='comprovante.html'"
 
-const updateTable = () =>{
+const updateTable = () => {
     clearTable()
     const db = readDB();
     db.forEach(createRow)
 }
 
-const saveCar = () =>{
+const saveCar = () => {
     const newCar = {
-        nome  : document.querySelector('#nome').value,
-        placa : document.querySelector('#placa').value,
-        data  : getDateNow(),
-        hora  : getHoursNow()
+        nome: document.querySelector('#nome').value,
+        placa: document.querySelector('#placa').value,
+        data: getDateNow(),
+        hora: getHoursNow()
     }
     insertIntoDB(newCar);
     clearInputs();
     updateTable();
 }
 
-const setReceipt = (index) =>{
+const setReceipt = (index) => {
     const db = readDB();
     const input = Array.from(document.querySelectorAll('#form-receipt input'));
     input[0].value = db[index].nome;
@@ -87,11 +87,11 @@ const setReceipt = (index) =>{
     input[3].value = db[index].hora;
 }
 
-const getButtons = (event) =>{
+const getButtons = (event) => {
     const button = event.target;
-    if(button.id == "button-receipt"){
+    if (button.id == "button-receipt") {
         const index = button.dataset.index;
-        openModalReceipt(); 
+        openModalReceipt();
         clearInputs();
     }
 
@@ -104,25 +104,26 @@ const openModalReceipt = () => document.querySelector('#modal-receipt').classLis
 const closeModalReceipt = () => document.querySelector('#modal-receipt').classList.remove('active');
 
 
-const clearInputs = () =>{
+const clearInputs = () => {
     const inputs = Array.from(document.querySelectorAll('input'));
     inputs.forEach(input => input.value = "");
 }
 
-const printRecipt = () =>{
+const printRecipt = () => {
     window.print();
 }
 
 // MODAL DE PREÇOS
 document.querySelector('#precos').addEventListener('click', () => { openModalPrices(); clearInputs() });
-document.querySelector('#close-prices').addEventListener('click', () => {closeModalPrices(); clearInputs()});
-document.querySelector('#cancelar-prices').addEventListener('click', () => {closeModalPrices(); clearInputs()});
+document.querySelector('#close-prices').addEventListener('click', () => { closeModalPrices(); clearInputs() });
+document.querySelector('#cancelar-prices').addEventListener('click', () => { closeModalPrices(); clearInputs() });
 // *****************
 // SELETOR DOS BOTÕES
 document.querySelector('#tableCars').addEventListener('click', getButtons);
 // ******************
 //MODAL COMPROVANTE
-document.querySelector('#close-receipt').addEventListener('click', () => {closeModalReceipt(); clearInputs()});
-document.querySelector('#cancelar-receipt').addEventListener('click', () => {closeModalReceipt(); clearInputs()});
+document.querySelector('#close-receipt').addEventListener('click', () => { closeModalReceipt(); clearInputs() });
+document.querySelector('#cancelar-receipt').addEventListener('click', () => { closeModalReceipt(); clearInputs() });
 
+document.querySelector('#salvar').addEventListener('click', saveCar);
 updateTable();
