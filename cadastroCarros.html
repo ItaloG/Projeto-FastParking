@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,31 +10,33 @@
     <link rel="stylesheet" href="css/styleGlobal.css">
     <link rel="stylesheet" href="css/hader.css">
     <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/modal.css">
 
 
 </head>
+
 <body>
     <header id="header">
         <h1>Sistema <span id="Fast">Fast</span><span id="Parking">Parking</span></h1>
         <img src="logoFastParking.png" alt="FastParking" title="FastParking">
     </header>
     <main>
-        <div id="container-register">       
-            <form id="form-register">
+        <div class="container-receipt">
+            <form class="form">
                 <div>
                     <label for="nome">Nome</label>
-                    <input type="text" class="input-form" id="nome" placeholder="Nome" required/>
+                    <input type="text" class="input-form" id="nome" placeholder="Nome" required />
                 </div>
                 <div>
                     <label for="placa">Placa</label>
-                    <input type="text" class="input-form" id="placa" placeholder="Placa" required/>
+                    <input type="text" class="input-form" id="placa" placeholder="Placa" required />
                 </div>
             </form>
-            <footer id="footer-register">
+            <footer class="modal-footer">
                 <button type="submit" class="button green" id="salvar">Salvar</button>
-                <button type="button" class="button yellow" id="precos" onclick="javascript:window.location.href='cadastroPrecos.html'">Preços</button>
+                <button type="button" class="button yellow" id="precos">Preços</button>
             </footer>
-            
+
         </div>
         <table id="tableCars">
             <thead>
@@ -48,23 +51,66 @@
             <tbody>
 
             </tbody>
-
         </table>
-    </main>    
+        <!-- MODAL DE PREÇOS -->
+        <div class="modal" id="modal-Prices">
+            <div class="modal-content">
+                <header class="modal-header">
+                    <h1>Preços</h1>
+                    <span class="close-button" id="close-prices">&#10006;</span>
+                </header>
+
+                <form class="form">
+                    <div>
+                        <label for="primeira-hora">Primeira hora</label>
+                        <input type="text" class="input-form" id="primeira-hora" placeholder="Primeira hora" required />
+                    </div>
+                    <div>
+                        <label for="demais-horas">Demais horas</label>
+                        <input type="text" class="input-form" id="demais-horas" placeholder="Demais horas" required />
+                    </div>
+                </form>
+
+                <footer class="modal-footer">
+                    <button type="submit" class="button green" id="salvarPreco">Salvar</button>
+                    <button type="button" class="button red" id="cancelar-prices">Cancelar</button>
+                </footer>
+            </div>
+        </div>
+        <!-- MODAL DE COMPROVANTE -->
+        <div class="modal" id="modal-receipt">
+            <div class="modal-content">
+                <header class="modal-header">
+                    <h1>Comprovante</h1>
+                    <span class="close-button" id="close-receipt">&#10006;</span>
+                </header>
+                <form class="form">
+                    <div>
+                        <label>Nome:</label>
+                        <input class="input-readonly" readonly />
+                    </div>
+                    <div>
+                        <label>Placa:</label>
+                        <input class="input-readonly" readonly />
+                    </div>
+                    <div>
+                        <label>Data:</label>
+                        <input class="input-readonly" readonly />
+                    </div>
+                    <div>
+                        <label>Hora:</label>
+                        <input class="input-readonly" readonly />
+                    </div>
+                </form>
+                <footer class="modal-footer">
+                    <button type="submit" class="button blue" id="imprimir">Imprimir</button>
+                    <button type="button" class="button red" id="cancelar-receipt">Cancelar</button>
+                </footer>
+
+            </div>
+        </div>
+    </main>
+    <script src="main.js"></script>
 </body>
-<script src="main.js"></script>
-<script lang="javascript">
 
-document.querySelector('#salvar')
-    .addEventListener('click', saveCar);
-
-document.querySelector('#precos')
-    .addEventListener('click', clearInputs);
-
-updateTable();
-document.querySelector('#tableCars')
-    .addEventListener('click', getButtons);
-
-        
-</script>
 </html>

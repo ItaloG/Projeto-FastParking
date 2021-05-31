@@ -81,101 +81,15 @@
     color: #d7db03;
 }
 /* ********* */
-/* FORMULÁRIOS */
-/* FORMULÁRIO REGISTRO */
-#container-register{
-    width: calc(40px + 35vw);
-    display: flex;
-    flex-direction: column;
-    
-    border: solid 2px black;
-    
-    margin: 0 auto 5vh;
-    border-radius: 5px;
-}
-
-#form-register{
-    display: flex;
-    flex-direction: column;
-    
-    gap: 30px;
-    margin: 40px auto;
-}
-
-#form-register div{
-    width: 250px;
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-} 
-
-#footer-register{
-    display: flex;
-    margin: 0 auto 30px;
-    gap: 20px;
-}
-
-.input-form{
-    width: calc(40px + 10vw);
-    height: 30px;
-    padding: 0 3px;
-    font-size: 14px;
-    border-radius: 3px;
-    outline-style: none;
-    border: 1px solid #919191;
-}
-.input-form:focus {
-    border: 2px solid #1fb6ff;
-}
 /* ********* */
-/* FORMULÁRIO PREÇO */
-#container-price{
-    width: calc(40px + 40vw);
-    display: flex;
-    flex-direction: column;
-    
-    border: solid 2px black;
-    
-    margin: 150px auto;
-    border-radius: 5px;
-}
 
-#container-price header{
-    padding: 10px;
-    
-}
-
-#container-price h1{
-    border-bottom: solid 1.5px rgba(63, 63, 63, 0.849) ;
-}
-
-#form-price{
-    display: flex;
-    flex-direction: column;
-    
-    gap: 30px;
-    margin: 40px auto;
-}
-
-#form-price div{
-    width: 350px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-} 
-
-#footer-price{
-    display: flex;
-    margin: 0 auto 30px;
-    gap: 60px;
-}
 /* ********* */
 /* COMPROVANTES */
 .container-receipt{
     width: calc(40px + 40vw);
     display: flex;
     flex-direction: column;
-    
+    border: solid 2px black;
     margin: 50px auto;
     border-radius: 5px;
 }
@@ -217,12 +131,4 @@
     gap: 60px;
 }
 
-.input-readonly{
-    border-style: none;
-    border-bottom: solid 1px black;
-}
 
-.input-readonly:focus{
-    outline-style: none;
-    border-bottom: solid 1px black;
-}

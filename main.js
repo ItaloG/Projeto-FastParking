@@ -9,8 +9,6 @@ const dateTime = {
     'minutes': date.getMinutes()
 }
 
-date
-
 const readDB = () => JSON.parse(localStorage.getItem('db')) ?? [];
 
 const setDB = (db) => localStorage.setItem('db', JSON.stringify(db));
@@ -53,7 +51,7 @@ const createRow = (car, index) => {
         <td>${car.data}</td>
         <td>${car.hora}</td>
         <td>
-            <button data-index="${index}" id="button-receipt" class="button green" type="button" onclick="javascript:window.location.href='comprovante.html'">Comp.</button>
+            <button data-index="${index}" id="button-receipt" class="button green" type="button">Comp.</button>
             <button data-index="${index}" id="button-edit" class="button blue" type="button">Editar</button>
             <button data-index="${index}" id="button-exit" class="button red" type="button" onclick="javascript:window.location.href='comprovanteSaida.html'">Saída</button>
         </td>`;
@@ -69,13 +67,13 @@ const updateTable = () =>{
 }
 
 const saveCar = () =>{
-    const nweCar = {
+    const newCar = {
         nome  : document.querySelector('#nome').value,
         placa : document.querySelector('#placa').value,
         data  : getDateNow(),
         hora  : getHoursNow()
     }
-    insertIntoDB(nweCar);
+    insertIntoDB(newCar);
     clearInputs();
     updateTable();
 }
@@ -93,10 +91,18 @@ const getButtons = (event) =>{
     const button = event.target;
     if(button.id == "button-receipt"){
         const index = button.dataset.index;
-        return index;
+        openModalReceipt(); 
+        clearInputs();
     }
 
 }
+
+const openModalPrices = () => document.querySelector('#modal-Prices').classList.add('active');
+const closeModalPrices = () => document.querySelector('#modal-Prices').classList.remove('active');
+
+const openModalReceipt = () => document.querySelector('#modal-receipt').classList.add('active');
+const closeModalReceipt = () => document.querySelector('#modal-receipt').classList.remove('active');
+
 
 const clearInputs = () =>{
     const inputs = Array.from(document.querySelectorAll('input'));
@@ -107,3 +113,16 @@ const printRecipt = () =>{
     window.print();
 }
 
+// MODAL DE PREÇOS
+document.querySelector('#precos').addEventListener('click', () => { openModalPrices(); clearInputs() });
+document.querySelector('#close-prices').addEventListener('click', () => {closeModalPrices(); clearInputs()});
+document.querySelector('#cancelar-prices').addEventListener('click', () => {closeModalPrices(); clearInputs()});
+// *****************
+// SELETOR DOS BOTÕES
+document.querySelector('#tableCars').addEventListener('click', getButtons);
+// ******************
+//MODAL COMPROVANTE
+document.querySelector('#close-receipt').addEventListener('click', () => {closeModalReceipt(); clearInputs()});
+document.querySelector('#cancelar-receipt').addEventListener('click', () => {closeModalReceipt(); clearInputs()});
+
+updateTable();
