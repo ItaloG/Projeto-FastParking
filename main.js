@@ -1,5 +1,15 @@
 'use strict';
 
+// 1. Controle de entrada.
+//     1. Armazenar Nome do Cliente, placa do veículo, data e Horário. OK
+//     2. Gerar comprovante de entrada. OK
+// 2. Controle de saída.
+//     1. Saída do veiculo OK
+//     2. Calculo do valor a pagar
+// 3. Cadastro de preços.
+//     1. Primeira hora
+//     2. Demais horas
+
 const date = new Date();
 const dateTime = {
     'day': date.getDate(),
@@ -8,6 +18,15 @@ const dateTime = {
     'hours': date.getHours(),
     'minutes': date.getMinutes()
 }
+
+const openModalPrices = () => document.querySelector('#modal-Prices').classList.add('active');
+const closeModalPrices = () => document.querySelector('#modal-Prices').classList.remove('active');
+
+const openModalReceipt = () => document.querySelector('#modal-receipt').classList.add('active');
+const closeModalReceipt = () => document.querySelector('#modal-receipt').classList.remove('active');
+
+const openModalExit = () => document.querySelector('#modal-exit').classList.add('active');
+const closeModalExit = () => document.querySelector('#modal-exit').classList.remove('active');
 
 const readDB = () => JSON.parse(localStorage.getItem('db')) ?? [];
 
@@ -53,7 +72,7 @@ const createRow = (car, index) => {
         <td>
             <button data-index="${index}" id="button-receipt" class="button green" type="button">Comp.</button>
             <button data-index="${index}" id="button-edit" class="button blue" type="button">Editar</button>
-            <button data-index="${index}" id="button-exit" class="button red" type="button" onclick="javascript:window.location.href='comprovanteSaida.html'">Saída</button>
+            <button data-index="${index}" id="button-exit" class="button red" type="button">Saída</button>
         </td>`;
     tableCars.appendChild(newTr);
 }
@@ -87,23 +106,32 @@ const setReceipt = (index) => {
     input[3].value = db[index].hora;
 }
 
+const setExit = (index) => {
+    const db = readDB();
+    const input = Array.from(document.querySelectorAll('#form-exit input'));
+    input[0].value = db[index].nome;
+    input[1].value = db[index].placa;
+    input[2].value = db[index].hora;
+    input[3].value = getHoursNow();
+    input[4].value = 20;
+}
+
+
 const getButtons = (event) => {
     const button = event.target;
     if (button.id == "button-receipt") {
         const index = button.dataset.index;
         openModalReceipt();
-        clearInputs();
+        setReceipt(index);
+    }
+    if (button.id == "button-exit") {
+        const index = button.dataset.index;
+        console.log(index);
+        openModalExit();
+        setExit(index);
     }
 
 }
-
-const openModalPrices = () => document.querySelector('#modal-Prices').classList.add('active');
-const closeModalPrices = () => document.querySelector('#modal-Prices').classList.remove('active');
-
-const openModalReceipt = () => document.querySelector('#modal-receipt').classList.add('active');
-const closeModalReceipt = () => document.querySelector('#modal-receipt').classList.remove('active');
-
-
 const clearInputs = () => {
     const inputs = Array.from(document.querySelectorAll('input'));
     inputs.forEach(input => input.value = "");
@@ -124,6 +152,9 @@ document.querySelector('#tableCars').addEventListener('click', getButtons);
 //MODAL COMPROVANTE
 document.querySelector('#close-receipt').addEventListener('click', () => { closeModalReceipt(); clearInputs() });
 document.querySelector('#cancelar-receipt').addEventListener('click', () => { closeModalReceipt(); clearInputs() });
+//MODAL SAÍDA
+document.querySelector('#close-exit').addEventListener('click', () => { closeModalExit(); clearInputs() });
+document.querySelector('#cancelar-exit').addEventListener('click', () => { closeModalExit(); clearInputs() });
 
 document.querySelector('#salvar').addEventListener('click', saveCar);
 updateTable();
