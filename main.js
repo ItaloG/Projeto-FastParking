@@ -10,7 +10,7 @@
 //     1. Primeira hora OK
 //     2. Demais horas OK
 // Botão editar OK
-// Saída do carro OK
+// Comprovante de Saída do carro OK
 
 const date = new Date();
 const dateTime = {
