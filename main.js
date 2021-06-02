@@ -6,6 +6,8 @@
 // 2. Controle de saída.
 //     1. Saída do veiculo OK
 //     2. Calculo do valor a pagar
+
+
 // 3. Cadastro de preços.
 //     1. Primeira hora
 //     2. Demais horas
@@ -29,13 +31,21 @@ const openModalExit = () => document.querySelector('#modal-exit').classList.add(
 const closeModalExit = () => document.querySelector('#modal-exit').classList.remove('active');
 
 const readDB = () => JSON.parse(localStorage.getItem('db')) ?? [];
-
 const setDB = (db) => localStorage.setItem('db', JSON.stringify(db));
+
+const readDBPrice = () => JSON.parse(localStorage.getItem('price')) ?? [];
+const setDBPrice = (dbPrice) => localStorage.setItem('price', JSON.stringify(dbPrice));
 
 const insertIntoDB = (car) => {
     const db = readDB();
     db.push(car);
     setDB(db);
+}
+
+const insertIntoDBPrices = (price) => {
+    const dbPrice = readDBPrice()
+    dbPrice.push(price)
+    setDBPrice(dbPrice)
 }
 
 const getDateNow = () => {
@@ -59,6 +69,12 @@ const clearTable = () => {
         recordCar.removeChild(recordCar.lastChild);
     }
 }
+
+const clearInputs = () => {
+    const inputs = Array.from(document.querySelectorAll('input'));
+    inputs.forEach(input => input.value = "");
+}
+
 
 const createRow = (car, index) => {
     const tableCars = document.querySelector('#tableCars tbody')
@@ -97,6 +113,70 @@ const saveCar = () => {
     updateTable();
 }
 
+const savePrice = () => {
+    const newPrice = {
+        primeiraHora: document.querySelector('#primeira-hora').value,
+        demaisHoras: document.querySelector('#demais-horas').value
+    }
+    insertIntoDBPrices(newPrice);
+    clearInputs();
+    closeModalPrices();
+}
+/**
+ * Calculo de saída
+ * hora de entrada - hora de saida(atual) = total de horas
+ * total de horas > 1
+ * se sim
+ *      total de horas - 1 = demais horas
+ *      demais hora * valor das demais horas = valor a ser pago pelas demias horas
+ *      valor a ser pago pelas demias horas + valor da primeira hora = valo a pagar
+ * se não
+ * valor a pagar = valor da primeira hora
+ */
+
+const calcExit = (index) => {
+    const db = readDB();
+    const dbPrices = readDBPrice();
+    const lastIndex = dbPrices.length - 1;
+
+    const valueOfFirsteHours = dbPrices[lastIndex]["primeiraHora"];
+    const valueOfMoreHours = dbPrices[lastIndex]["demaisHoras"];
+
+    const entryTime = db[index].hora.substr(0, 2);
+    let exitTime = getHoursNow().substr(0, 2);
+    let valueOfBePay = 0
+
+    if (exitTime == '0:') {
+        exitTime = 24;
+        let totalHoursParked = parseInt(entryTime) - parseInt(exitTime);
+        if (totalHoursParked < 0) {
+            totalHoursParked *= -1;
+        }
+        if (totalHoursParked > 1) {
+            const moreHours = totalHoursParked - 1;
+            const valueOfBePayMoreHours = moreHours * valueOfMoreHours;
+            const valueOfBePay = parseInt(valueOfBePayMoreHours) + parseInt(valueOfFirsteHours);
+            console.log(valueOfBePay);
+        } else {
+            valueOfBePay = valueOfFirsteHours;
+        }
+
+    } else {
+        let totalHoursParked = parseInt(entryTime) - parseInt(exitTime);
+        if (totalHoursParked < 0) {
+            totalHoursParked *= -1;
+        }
+        if (totalHoursParked > 1) {
+            const moreHours = totalHoursParked - 1;
+            const valueOfBePayMoreHours = moreHours * valueOfMoreHours;
+            valueOfBePay = parseInt(valueOfBePayMoreHours) + parseInt(valueOfFirsteHours);
+        } else {
+            valueOfBePay = valueOfFirsteHours;
+        }
+    }
+    return valueOfBePay;
+}
+
 const setReceipt = (index) => {
     const db = readDB();
     const input = Array.from(document.querySelectorAll('#form-receipt input'));
@@ -113,7 +193,7 @@ const setExit = (index) => {
     input[1].value = db[index].placa;
     input[2].value = db[index].hora;
     input[3].value = getHoursNow();
-    input[4].value = 20;
+    input[4].value = calcExit(index);
 }
 
 
@@ -126,15 +206,10 @@ const getButtons = (event) => {
     }
     if (button.id == "button-exit") {
         const index = button.dataset.index;
-        console.log(index);
         openModalExit();
         setExit(index);
     }
 
-}
-const clearInputs = () => {
-    const inputs = Array.from(document.querySelectorAll('input'));
-    inputs.forEach(input => input.value = "");
 }
 
 const printRecipt = () => {
@@ -155,6 +230,8 @@ document.querySelector('#cancelar-receipt').addEventListener('click', () => { cl
 //MODAL SAÍDA
 document.querySelector('#close-exit').addEventListener('click', () => { closeModalExit(); clearInputs() });
 document.querySelector('#cancelar-exit').addEventListener('click', () => { closeModalExit(); clearInputs() });
-
+//SALVAR CARRO
 document.querySelector('#salvar').addEventListener('click', saveCar);
+//SALVAR PREÇO
+document.querySelector('#salvarPreco').addEventListener('click', savePrice);
 updateTable();
