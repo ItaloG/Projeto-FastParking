@@ -9,6 +9,8 @@
 // 3. Cadastro de preços.
 //     1. Primeira hora OK
 //     2. Demais horas OK
+// Botão editar OK
+// Saída do carro OK
 
 const date = new Date();
 const dateTime = {
@@ -102,39 +104,51 @@ const updateTable = () => {
     db.forEach(createRow)
 }
 
+const isValidFormRegister = () => document.querySelector('#form-register').reportValidity();
+
 const saveCar = () => {
-    const newCar = {
-        nome: document.querySelector('#nome').value,
-        placa: document.querySelector('#placa').value,
-        data: getDateNow(),
-        hora: getHoursNow()
+    if (isValidFormRegister()) {
+        const newCar = {
+            nome: document.querySelector('#nome').value,
+            placa: document.querySelector('#placa').value,
+            data: getDateNow(),
+            hora: getHoursNow()
+        }
+        insertIntoDB(newCar);
+        clearInputs();
+        updateTable();
     }
-    insertIntoDB(newCar);
-    clearInputs();
-    updateTable();
 }
+
+const isValidFormPrice = () => document.querySelector('#form-price').reportValidity();
 
 const savePrice = () => {
-    const newPrice = {
-        primeiraHora: document.querySelector('#primeira-hora').value,
-        demaisHoras: document.querySelector('#demais-horas').value
+    if (isValidFormPrice()) {
+        const newPrice = {
+            primeiraHora: document.querySelector('#primeira-hora').value,
+            demaisHoras: document.querySelector('#demais-horas').value
+        }
+        insertIntoDBPrices(newPrice);
+        clearInputs();
+        closeModalPrices();
     }
-    insertIntoDBPrices(newPrice);
-    clearInputs();
-    closeModalPrices();
 }
 
+const isValidFormEdit = () => document.querySelector('#form-edit').reportValidity();
+
 const saveCarEdited = () => {
-    const newCar = {
-        nome: document.querySelector('#nome-edited').value,
-        placa: document.querySelector('#placa-edited').value,
-        data: document.querySelector('#data').value,
-        hora: document.querySelector('#hora').value
+    if (isValidFormEdit()) {
+        const newCar = {
+            nome: document.querySelector('#nome-edited').value,
+            placa: document.querySelector('#placa-edited').value,
+            data: document.querySelector('#data').value,
+            hora: document.querySelector('#hora').value
+        }
+        insertIntoDB(newCar);
+        clearInputs();
+        closeModalEdit();
+        updateTable();
     }
-    insertIntoDB(newCar);
-    clearInputs();
-    closeModalEdit();
-    updateTable();
 }
 
 const calcExit = (index) => {
@@ -181,11 +195,11 @@ const calcExit = (index) => {
 }
 
 
-const deleteCar = (index) =>{
+const deleteCar = (index) => {
     const db = readDB()
     const resp = confirm(`Ao confirmar os dado de ${db[index].nome} serão apagados`);
-    
-    if(resp){
+
+    if (resp) {
         db.splice(index, 1)
         setDB(db);
         updateTable();
@@ -212,7 +226,7 @@ const setExit = (index) => {
     deleteCar(index);
 }
 
-const editCar = (index) =>{
+const editCar = (index) => {
 
     const db = readDB();
     document.querySelector('#nome-edited').value = db[index].nome;
@@ -228,11 +242,11 @@ const getButtons = (event) => {
         const index = button.dataset.index;
         openModalReceipt();
         setReceipt(index);
-    }else if (button.id == "button-exit") {
+    } else if (button.id == "button-exit") {
         const index = button.dataset.index;
         openModalExit();
         setExit(index);
-    }else if(button.id == "button-edit"){
+    } else if (button.id == "button-edit") {
         const index = button.dataset.index;
         openModalEdit();
         editCar(index);
@@ -267,4 +281,7 @@ document.querySelector('#salvar').addEventListener('click', saveCar);
 document.querySelector('#salvarPreco').addEventListener('click', savePrice);
 //SALVAR EDITAR
 document.querySelector('#editar').addEventListener('click', saveCarEdited);
+// IMPRESÃO
+document.querySelector('#imprimir-receipt').addEventListener('click', printRecipt)
+document.querySelector('#imprimir-exit').addEventListener('click', printRecipt)
 updateTable();

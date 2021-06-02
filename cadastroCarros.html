@@ -22,7 +22,7 @@
     </header>
     <main>
         <div class="container-receipt">
-            <form class="form">
+            <form class="form" id="form-register">
                 <div>
                     <label for="nome">Nome</label>
                     <input type="text" class="input-form" id="nome" placeholder="Nome" required />
@@ -60,7 +60,7 @@
                     <span class="close-button" id="close-prices">&#10006;</span>
                 </header>
 
-                <form class="form">
+                <form class="form" id="form-price">
                     <div>
                         <label for="primeira-hora">Primeira hora</label>
                         <input type="text" class="input-form" id="primeira-hora" placeholder="Primeira hora" required />
@@ -85,7 +85,7 @@
                     <span class="close-button" id="close-edit">&#10006;</span>
                 </header>
 
-                <form class="form">
+                <form class="form" id="form-edit">
                     <div>
                         <label for="nome-edited">Nome</label>
                         <input type="text" class="input-form" id="nome-edited" required />
@@ -136,7 +136,7 @@
                     </div>
                 </form>
                 <footer class="modal-footer">
-                    <button type="submit" class="button blue" id="imprimir">Imprimir</button>
+                    <button type="submit" class="button blue" id="imprimir-receipt">Imprimir</button>
                     <button type="button" class="button red" id="cancelar-receipt">Cancelar</button>
                 </footer>
             </div>
@@ -171,7 +171,7 @@
                     </div>
                 </form>
                 <footer class="modal-footer">
-                    <button type="submit" class="button blue" id="imprimir">Imprimir</button>
+                    <button type="submit" class="button blue" id="imprimir-exit">Imprimir</button>
                     <button type="button" class="button red" id="cancelar-exit">Cancelar</button>
                 </footer>
 
