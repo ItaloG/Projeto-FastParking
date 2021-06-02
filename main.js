@@ -5,12 +5,10 @@
 //     2. Gerar comprovante de entrada. OK
 // 2. Controle de saída.
 //     1. Saída do veiculo OK
-//     2. Calculo do valor a pagar
-
-
+//     2. Calculo do valor a pagar OK
 // 3. Cadastro de preços.
-//     1. Primeira hora
-//     2. Demais horas
+//     1. Primeira hora OK
+//     2. Demais horas OK
 
 const date = new Date();
 const dateTime = {
@@ -29,6 +27,9 @@ const closeModalReceipt = () => document.querySelector('#modal-receipt').classLi
 
 const openModalExit = () => document.querySelector('#modal-exit').classList.add('active');
 const closeModalExit = () => document.querySelector('#modal-exit').classList.remove('active');
+
+const openModalEdit = () => document.querySelector('#modal-edit').classList.add('active');
+const closeModalEdit = () => document.querySelector('#modal-edit').classList.remove('active');
 
 const readDB = () => JSON.parse(localStorage.getItem('db')) ?? [];
 const setDB = (db) => localStorage.setItem('db', JSON.stringify(db));
@@ -122,17 +123,19 @@ const savePrice = () => {
     clearInputs();
     closeModalPrices();
 }
-/**
- * Calculo de saída
- * hora de entrada - hora de saida(atual) = total de horas
- * total de horas > 1
- * se sim
- *      total de horas - 1 = demais horas
- *      demais hora * valor das demais horas = valor a ser pago pelas demias horas
- *      valor a ser pago pelas demias horas + valor da primeira hora = valo a pagar
- * se não
- * valor a pagar = valor da primeira hora
- */
+
+const saveCarEdited = () => {
+    const newCar = {
+        nome: document.querySelector('#nome-edited').value,
+        placa: document.querySelector('#placa-edited').value,
+        data: document.querySelector('#data').value,
+        hora: document.querySelector('#hora').value
+    }
+    insertIntoDB(newCar);
+    clearInputs();
+    closeModalEdit();
+    updateTable();
+}
 
 const calcExit = (index) => {
     const db = readDB();
@@ -177,6 +180,18 @@ const calcExit = (index) => {
     return valueOfBePay;
 }
 
+
+const deleteCar = (index) =>{
+    const db = readDB()
+    const resp = confirm(`Ao confirmar os dado de ${db[index].nome} serão apagados`);
+    
+    if(resp){
+        db.splice(index, 1)
+        setDB(db);
+        updateTable();
+    }
+}
+
 const setReceipt = (index) => {
     const db = readDB();
     const input = Array.from(document.querySelectorAll('#form-receipt input'));
@@ -194,8 +209,18 @@ const setExit = (index) => {
     input[2].value = db[index].hora;
     input[3].value = getHoursNow();
     input[4].value = calcExit(index);
+    deleteCar(index);
 }
 
+const editCar = (index) =>{
+
+    const db = readDB();
+    document.querySelector('#nome-edited').value = db[index].nome;
+    document.querySelector('#placa-edited').value = db[index].placa;
+    document.querySelector('#data').value = db[index].data;
+    document.querySelector('#hora').value = db[index].hora;
+    deleteCar(index);
+}
 
 const getButtons = (event) => {
     const button = event.target;
@@ -203,11 +228,14 @@ const getButtons = (event) => {
         const index = button.dataset.index;
         openModalReceipt();
         setReceipt(index);
-    }
-    if (button.id == "button-exit") {
+    }else if (button.id == "button-exit") {
         const index = button.dataset.index;
         openModalExit();
         setExit(index);
+    }else if(button.id == "button-edit"){
+        const index = button.dataset.index;
+        openModalEdit();
+        editCar(index);
     }
 
 }
@@ -230,8 +258,13 @@ document.querySelector('#cancelar-receipt').addEventListener('click', () => { cl
 //MODAL SAÍDA
 document.querySelector('#close-exit').addEventListener('click', () => { closeModalExit(); clearInputs() });
 document.querySelector('#cancelar-exit').addEventListener('click', () => { closeModalExit(); clearInputs() });
+//MODAL EDITAR
+document.querySelector('#close-edit').addEventListener('click', () => { closeModalEdit(); clearInputs() });
+document.querySelector('#cancelar-edit').addEventListener('click', () => { closeModalEdit(); clearInputs() });
 //SALVAR CARRO
 document.querySelector('#salvar').addEventListener('click', saveCar);
 //SALVAR PREÇO
 document.querySelector('#salvarPreco').addEventListener('click', savePrice);
+//SALVAR EDITAR
+document.querySelector('#editar').addEventListener('click', saveCarEdited);
 updateTable();
