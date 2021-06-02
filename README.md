@@ -14,4 +14,5 @@ Utilização do LocalStorage para armazenar dados.
 
 <h2>Projeto</h2>
 Acesse meu projeto por aqui: ↷
+
 https://italog.github.io/Projeto-FastParking/cadastroCarros.html
